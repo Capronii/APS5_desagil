@@ -344,11 +344,8 @@ def game_run():
     all_sprites.add(rapidFire)
     all_emojis.add(rapidFire)
 
-    #Loop principal:
-    while True:
-        clock.tick(FPS)
-        # Checa eventos:
-        for event in pg.event.get():
+
+    def controlaComandos(event):
             if event.type == pg.QUIT:
                 return QUIT
             # Movimentação do jogador ao pressionar as setas e atirar com espaço
@@ -373,6 +370,13 @@ def game_run():
                     jogador.speedy += 15
                 if event.key == pg.K_DOWN:
                     jogador.speedy -= 15
+                    
+    #Loop principal:
+    while True:
+        clock.tick(FPS)
+        # Checa eventos:
+        for event in pg.event.get():
+            controlaComandos(event)
 
         # Contador: fonte: https://stackoverflow.com/questions/23717803/i-need-to-make-a-stopwatch-with-pygame
         milliseconds = pg.time.get_ticks() - t0
